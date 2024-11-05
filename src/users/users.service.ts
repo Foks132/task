@@ -88,4 +88,20 @@ export class UsersService {
       },
     };
   }
+
+  async removeAll() {
+    const users = await this.userRepository.find();
+    if (!users || users.length < 1) {
+      return {
+        success: false,
+        result: {
+          error: 'Users not found'
+        }
+      }
+    }
+    await this.userRepository.remove(users);
+    return {
+      success: true,
+    };
+  }
 }
