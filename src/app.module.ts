@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users/entities/user.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [UsersModule, TypeOrmModule.forRoot({
+  imports: [UsersModule, ConfigModule.forRoot(), TypeOrmModule.forRoot({
     type: 'mariadb',
     host: '81.31.247.100',
     port: 3306,
