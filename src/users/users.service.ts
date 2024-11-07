@@ -11,16 +11,18 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-  ) { }
+  ) {}
 
-  async create(createUserDto: CreateUserDto | null): Promise<UserResponse | null> {
+  async create(
+    createUserDto: CreateUserDto | null,
+  ): Promise<UserResponse | null> {
     const user = await this.userRepository.save(createUserDto);
     return {
       success: true,
       result: {
         id: user.id,
       },
-    }
+    };
   }
 
   async findAll(): Promise<UserResponse | null> {
@@ -39,9 +41,9 @@ export class UsersService {
       return {
         success: false,
         result: {
-          error: 'User not found'
-        }
-      }
+          error: 'User not found',
+        },
+      };
     }
     return {
       success: true,
@@ -59,9 +61,9 @@ export class UsersService {
       return {
         success: false,
         result: {
-          error: 'User not found'
-        }
-      }
+          error: 'User not found',
+        },
+      };
     }
     return {
       success: true,
@@ -71,15 +73,18 @@ export class UsersService {
     };
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto): Promise<UserResponse | null> {
+  async update(
+    id: number,
+    updateUserDto: UpdateUserDto,
+  ): Promise<UserResponse | null> {
     let user = await this.userRepository.findOneBy({ id });
     if (!user) {
       return {
         success: false,
         result: {
-          error: 'User not found'
-        }
-      }
+          error: 'User not found',
+        },
+      };
     }
     await this.userRepository.update(id, updateUserDto);
     user = await this.userRepository.findOneBy({ id });
@@ -89,7 +94,7 @@ export class UsersService {
         id: user.id,
         full_name: user.full_name,
         role: user.role,
-        efficiency: user.efficiency
+        efficiency: user.efficiency,
       },
     };
   }
@@ -100,9 +105,9 @@ export class UsersService {
       return {
         success: false,
         result: {
-          error: 'User not found'
-        }
-      }
+          error: 'User not found',
+        },
+      };
     }
     await this.userRepository.remove(user);
     return {
@@ -111,7 +116,7 @@ export class UsersService {
         id: id,
         full_name: user.full_name,
         role: user.role,
-        efficiency: user.efficiency
+        efficiency: user.efficiency,
       },
     };
   }
@@ -122,9 +127,9 @@ export class UsersService {
       return {
         success: false,
         result: {
-          error: 'Users not found'
-        }
-      }
+          error: 'Users not found',
+        },
+      };
     }
     await this.userRepository.remove(users);
     return {

@@ -7,16 +7,20 @@ import { User } from './users/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [UsersModule, ConfigModule.forRoot(), TypeOrmModule.forRoot({
-    type: 'mariadb',
-    host: '81.31.247.100',
-    port: 3306,
-    username: 'uazPBI',
-    password: 'AgXQistIcKKjnXAg',
-    database: 'rACnoyZh',
-    entities: [User],
-    synchronize: true
-  })],
+  imports: [
+    UsersModule,
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot({
+      type: 'mariadb',
+      host: '81.31.247.100',
+      port: 3306,
+      username: 'uazPBI',
+      password: 'AgXQistIcKKjnXAg',
+      database: 'rACnoyZh',
+      entities: [User],
+      synchronize: true,
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
